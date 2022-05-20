@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--COPY RIGHT BY REZQIMBK-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--botstrap5 css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>HERO LIST</title>
+</head>
+<!--COPY RIGHT BY REZQIMBK-->
+<body class="container bg-info">
+    <!--inbox-->
+    <p>
+        <button class="btn btn-primary  position-relative mt-4 shadow" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
+            Inbox
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    1+
+    <span class="visually-hidden">unread messages</span>
+    </span>
+        </button>
+      </p>
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse mb-4" id="multiCollapseExample2">
+            <div class="card card-body">
+              Halo Bang Dea! Ini Pertama Kalinya Saya Ikut Course & Pertama Kalinya Saya Mencoba Membuat Projects Node.js , Mohon Kritik & Sarannya Bang
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--title-->
+    <h1 class="text-center bg-warning bg-gradient  rounded-pill border border-secondary">
+        <%= heroes.title %>
+    </h1>
+    <audio src="/audio/welcome_to_mobilelegends.mp3"></audio>
+    <!--output database list-->
+    <table class="table  table-dark table-striped shadow ">
+        <tr>
+            <br/>
+            <th>id</th>
+            <th>name</th>
+            <th>role</th>
+            <th>winrate</th>
+            <th>pertandingan</th>
+            <th>mvp</th>
+            <th>savege</th>
+            <th>action</th>
+        </tr>
+        <% for (let i = 0; i < heroes.data.length; i++) { %>
+            <tr>
+                <td>
+                    <%= i + 1 %>
+                </td>
+                <td>
+                    <%= heroes.data[i].name %>
+                </td>
+                <td>
+                    <%= heroes.data[i].role %>
+                </td>
+                <td>
+                    <%= heroes.data[i].wr %>
+                </td>
+                <td>
+                    <%= heroes.data[i].pertandingan %>
+                </td>
+                <td>
+                    <%= heroes.data[i].mvp %>
+                </td>
+                <td>
+                    <%= heroes.data[i].savege %>
+                </td>
+                <form action="/hero/remove" method="post">
+                    <td>
+                        <!--edit hero-->
+                        <a class="btn border border-success bg-success" href="/hero/<%= heroes.data[i].id %>">edit</a>
+                        <!--remove hero-->
+                        <input type="text" hidden name="id" value="<%= heroes.data[i].id %>" />
+                        <button type="button" class="btn border border-danger bg-danger shadow" data-bs-toggle="modal" data-bs-target="#exampleModall">Hapus
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModallLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModallLabel">Konfirmasi Perubahan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary shadow" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-danger shadow" value="hapus"></input>
+                              </div>
+                            </div>
+                          </div>
+                        </div>                
+                    </td>
+                </form>
+            </tr>
+            <% } %>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <!--title tambah hero-->
+    <h3 class="text-center bg-warning border border-secondary">TAMBAHKAN HERO</h3>
+    <!--inputdatabaselist-->
+    <form class="shadow-lg p-3 mb-5 bg-gradient mx-auto" action="/hero/add" method="post">
+        <select class="container shadow border border-dark form-select bg-light mb-2" type="text" name="role" aria-label="select example">
+            <option selected>Role</option>
+            <option value="Maksman">Maksman</option>
+            <option value="Tank">Tank</option>
+            <option value="Figther">Figther</option>
+            <option value="Mage">Mage</option>
+            <option value="Assasin">Assasin</option>
+            <option value="Support">Support</option>
+          </select>
+        <input class="container shadow mb-2" type="text" name="name" placeholder="Hero" />
+        <input class="container shadow mb-2" type="text" name="wr" placeholder="Winrate" />
+        <input class="container shadow mb-2" type="text" name="pertandingan" placeholder="Pertandingan" />
+        <input class="container shadow mb-2" type="text" name="mvp" placeholder="Mvp" />
+        <input class="container shadow mb-2" type="text" name="savege" placeholder="Savege" />
+        <br/>
+        <br/>
+        <button type="button" class="btn btn-warning d-flex justify-content-center mx-auto align-items-center shadow" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambahkan
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Konfirmasi Perubahan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary shadow" data-bs-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-warning shadow" value="tambahkan"></input>
+              </div>
+            </div>
+          </div>
+        </div>        
+    </form>
+    <div>
+    <!--title kritik&saran-->
+        <h3 class="text-center bg-warning border border-secondary ">KRITIK & SARAN</h3>
+    <!--outputform-->
+    <form 
+    action="https://formspree.io/f/xoqrkgrp"
+    method="POST">
+    <!-- form body -->
+      <div class="mb-1 shadow-lg p-3 mb-5 bg-gradient mx-auto">
+      <div class="mb-1">
+        <label class="form-label">Kritik & Saran :
+        <textarea name="pesan" class="form-control bg-colorForm shadow" id="komen" rows="4"></textarea>
+        </label>                    
+      </div>               
+      <button type="submit" class="bg-warning btn btn-costum shadow">Kirim</button>
+      </div>
+    </form>
+    </div>
+<!--copyright by rezqimbk-->
+    <h6 class="text-center mt-4">Copyright@2022 <span class="acsenTwoColor">rezqimbk</span> </h6>
+<!--scriptbotsrap5-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -10,7 +10,7 @@
     <title>HERO LIST</title>
 </head>
 <!--COPY RIGHT BY REZQIMBK-->
-<body class="container bg-info">
+<body class="container select bg1 ">
     <!--inbox-->
     <p>
         <button class="btn btn-primary  position-relative mt-4 shadow" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
@@ -30,6 +30,83 @@
           </div>
         </div>
       </div>
+
+      <div class="container btncolor mb-4 mt-4">
+        <button class="btn btn-dark font-monospace" onclick="cColor()">Ganti Background</button>
+        <script>
+            function selected(){
+                return document.getElementsByClassName('select')
+            }
+      function cColor() {
+        let all = selected ();
+        for (let i = 0; i < 1; i++) {
+            let color = all[i].classList;
+            if (color.contains('bg1')) {
+                all[i].classList.add('bg2');
+                all[i].classList.remove('bg1');
+            }
+            else if (color.contains('bg2')) {
+                all[i].classList.add('bg3');
+                all[i].classList.remove('bg2');
+            }
+            else if (color.contains('bg3')) {
+                all[i].classList.add('bg4');
+                all[i].classList.remove('bg3');
+            }
+            else if (color.contains('bg4')) {
+                all[i].classList.add('bg5');
+                all[i].classList.remove('bg4');
+            }
+            else if (color.contains('bg5')) {
+                all[i].classList.add('bg6');
+                all[i].classList.remove('bg5');
+            }
+            else if (color.contains('bg6')) {
+                all[i].classList.add('bg7');
+                all[i].classList.remove('bg6');
+            }
+            else if (color.contains('bg7')) {
+                all[i].classList.add('bg1');
+                all[i].classList.remove('bg7');
+            }
+        }
+    }
+        </script>
+   </div>
+
+<style>
+.bg1{
+    background-color: white;
+}
+.bg2{
+    background-color: greenyellow;
+}
+.bg3{
+    background-color: turquoise;
+}
+.bg4{
+    background-color: tomato;
+}
+.bg5{
+    background-color: burlywood;
+}
+.bg6{
+    background-color: chocolate;
+}
+.bg7{
+    background-color: darkolivegreen;
+}
+.btncolor>button:hover{
+    color: goldenrod;
+    transition: all .3s ease-in-out;
+}
+.tambahlist>button:hover{
+    color: goldenrod;
+    background-color: black;
+    transition: all .3s ease-in-out;
+}
+</style>
+
     <!--title-->
     <h1 class="text-center bg-warning bg-gradient  rounded-pill border border-secondary">
         <%= heroes.title %>
@@ -105,18 +182,18 @@
     <!--title tambah hero-->
     <h3 class="text-center bg-warning border border-secondary">TAMBAHKAN HERO</h3>
     <!--inputdatabaselist-->
-    <form class="shadow-lg p-3 mb-5 bg-gradient mx-auto" action="/hero/add" method="post">
+    <form class="shadow-lg p-3 mb-5 bg-gradient mx-auto tambahlist" action="/hero/add" method="post">
         <select class="container shadow border border-dark form-select bg-light mb-2" type="text" name="role" aria-label="select example">
-            <option selected>Role</option>
+          <option selected disabled value="">Role</option>
             <option value="Maksman">Maksman</option>
             <option value="Tank">Tank</option>
             <option value="Figther">Figther</option>
             <option value="Mage">Mage</option>
             <option value="Assasin">Assasin</option>
             <option value="Support">Support</option>
-          </select>
+        </select>
         <input class="container shadow mb-2" type="text" name="name" placeholder="Hero" />
-        <input class="container shadow mb-2" type="text" name="wr" placeholder="Winrate" />
+        <input class="container shadow mb-2" type="text" name="wr" placeholder="Winrate%" />
         <input class="container shadow mb-2" type="text" name="pertandingan" placeholder="Pertandingan" />
         <input class="container shadow mb-2" type="text" name="mvp" placeholder="Mvp" />
         <input class="container shadow mb-2" type="text" name="savege" placeholder="Savege" />
